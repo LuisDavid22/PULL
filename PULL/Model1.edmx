@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tssDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Nomina">
+          <Key>
+            <PropertyRef Name="IdNomina" />
+          </Key>
+          <Property Name="IdNomina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rnc" Type="varchar" MaxLength="20" />
+          <Property Name="Periodo" Type="date" />
+        </EntityType>
+        <EntityType Name="Nomina_Detalle">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdNomina" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoDocumento" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroDocumento" Type="varchar" MaxLength="20" />
+          <Property Name="SalarioCotizable" Type="float" />
+          <Property Name="AporteVoluntario" Type="float" />
+          <Property Name="ISR" Type="float" />
+          <Property Name="RemOtrosAgentes" Type="float" />
+          <Property Name="SaldoAFavor" Type="float" />
+          <Property Name="OtrasRemuneraciones" Type="float" />
+          <Property Name="SalarioINFOTEP" Type="float" />
+          <Property Name="IdNomina" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Nomina_De__IdNom__25869641">
+          <End Role="Nomina" Type="Self.Nomina" Multiplicity="1" />
+          <End Role="Nomina_Detalle" Type="Self.Nomina_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nomina">
+              <PropertyRef Name="IdNomina" />
+            </Principal>
+            <Dependent Role="Nomina_Detalle">
+              <PropertyRef Name="IdNomina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tssDBModelStoreContainer">
+          <EntitySet Name="Nomina" EntityType="Self.Nomina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nomina_Detalle" EntityType="Self.Nomina_Detalle" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Nomina_De__IdNom__25869641" Association="Self.FK__Nomina_De__IdNom__25869641">
+            <End Role="Nomina" EntitySet="Nomina" />
+            <End Role="Nomina_Detalle" EntitySet="Nomina_Detalle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tssDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Nomina">
+          <Key>
+            <PropertyRef Name="IdNomina" />
+          </Key>
+          <Property Name="IdNomina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rnc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Periodo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Nomina_Detalle" Relationship="Self.FK__Nomina_De__IdNom__25869641" FromRole="Nomina" ToRole="Nomina_Detalle" />
+        </EntityType>
+        <EntityType Name="Nomina_Detalle">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdNomina" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SalarioCotizable" Type="Double" />
+          <Property Name="AporteVoluntario" Type="Double" />
+          <Property Name="ISR" Type="Double" />
+          <Property Name="RemOtrosAgentes" Type="Double" />
+          <Property Name="SaldoAFavor" Type="Double" />
+          <Property Name="OtrasRemuneraciones" Type="Double" />
+          <Property Name="SalarioINFOTEP" Type="Double" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Nomina" Relationship="Self.FK__Nomina_De__IdNom__25869641" FromRole="Nomina_Detalle" ToRole="Nomina" />
+        </EntityType>
+        <Association Name="FK__Nomina_De__IdNom__25869641">
+          <End Role="Nomina" Type="Self.Nomina" Multiplicity="1" />
+          <End Role="Nomina_Detalle" Type="Self.Nomina_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nomina">
+              <PropertyRef Name="IdNomina" />
+            </Principal>
+            <Dependent Role="Nomina_Detalle">
+              <PropertyRef Name="IdNomina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tssDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Nomina" EntityType="Self.Nomina" />
+          <EntitySet Name="Nomina_Detalle" EntityType="Self.Nomina_Detalle" />
+          <AssociationSet Name="FK__Nomina_De__IdNom__25869641" Association="Self.FK__Nomina_De__IdNom__25869641">
+            <End Role="Nomina" EntitySet="Nomina" />
+            <End Role="Nomina_Detalle" EntitySet="Nomina_Detalle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tssDBModelStoreContainer" CdmEntityContainer="tssDBEntities">
+          <EntitySetMapping Name="Nomina">
+            <EntityTypeMapping TypeName="tssDBModel.Nomina">
+              <MappingFragment StoreEntitySet="Nomina">
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+                <ScalarProperty Name="Rnc" ColumnName="Rnc" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nomina_Detalle">
+            <EntityTypeMapping TypeName="tssDBModel.Nomina_Detalle">
+              <MappingFragment StoreEntitySet="Nomina_Detalle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="NumeroDocumento" ColumnName="NumeroDocumento" />
+                <ScalarProperty Name="SalarioCotizable" ColumnName="SalarioCotizable" />
+                <ScalarProperty Name="AporteVoluntario" ColumnName="AporteVoluntario" />
+                <ScalarProperty Name="ISR" ColumnName="ISR" />
+                <ScalarProperty Name="RemOtrosAgentes" ColumnName="RemOtrosAgentes" />
+                <ScalarProperty Name="SaldoAFavor" ColumnName="SaldoAFavor" />
+                <ScalarProperty Name="OtrasRemuneraciones" ColumnName="OtrasRemuneraciones" />
+                <ScalarProperty Name="SalarioINFOTEP" ColumnName="SalarioINFOTEP" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
